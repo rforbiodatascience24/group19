@@ -6,6 +6,12 @@ editor: visual
 
 ## Nina
 
+Heyy
+
+```{r}
+2+2
+```
+
 ## Mariam
 
 Ég er svöng
@@ -17,3 +23,17 @@ editor: visual
 ## Ida Sofie
 
 ## Victor
+
+Nice weather
+
+```{r}
+
+2+2
+```
+
+Good morning
+
+```{r}
+
+33/6
+```
