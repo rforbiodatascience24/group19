@@ -6,6 +6,12 @@ editor: visual
 
 ## Nina
 
+Heyy
+
+```{r}
+2+2
+```
+
 ## Mariam
 
 ## Ida Sofie
@@ -19,3 +25,17 @@ print("I am cool B)")
 ```
 
 ## Victor
+
+Nice weather
+
+```{r}
+
+2+2
+```
+
+Good morning
+
+```{r}
+
+33/6
+```
