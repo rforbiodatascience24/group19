@@ -12,6 +12,14 @@ Heyy
 2+2
 ```
 
+### New analysis
+
+Here's some text.
+
+```{r}
+44*6
+```
+
 ## Mariam
 
 ## Ida Sofie
