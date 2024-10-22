@@ -14,6 +14,12 @@ Heyy
 
 ## Mariam
 
+## New analysis
+
+```{r}
+420+0
+```
+
 Ég er svöng
 
 ```{r}
