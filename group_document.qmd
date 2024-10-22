@@ -22,6 +22,14 @@ Heyy
 
 ## Ida Sofie
 
+```{r}
+2+2
+```
+
+```{r}
+print("I am cool B)")
+```
+
 ## Victor
 
 Nice weather
