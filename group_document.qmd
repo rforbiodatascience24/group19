@@ -12,7 +12,21 @@ Heyy
 2+2
 ```
 
+### New analysis
+
+Here's some text.
+
+```{r}
+44*6
+```
+
 ## Mariam
+
+## New analysis
+
+```{r}
+420+0
+```
 
 Ég er svöng
 
@@ -30,9 +44,25 @@ Heyy
 print("I am cool B)")
 ```
 
+#### New analysis
+
+Hello!
+
+```{r}
+1+2
+```
+
 ## Victor
 
-Nice weather
+### New feature
+
+blah blah
+
+```{r}
+3+3
+```
+
+Nice weatherd
 
 ```{r}
 
