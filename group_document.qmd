@@ -30,6 +30,14 @@ Heyy
 print("I am cool B)")
 ```
 
+#### New analysis
+
+Hello!
+
+```{r}
+1+2
+```
+
 ## Victor
 
 Nice weather
