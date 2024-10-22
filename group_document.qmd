@@ -8,6 +8,12 @@ editor: visual
 
 ## Mariam
 
+Ég er svöng
+
+```{r}
+1+1
+```
+
 ## Ida Sofie
 
 ## Victor
