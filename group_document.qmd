@@ -17,3 +17,17 @@ Heyy
 ## Ida Sofie
 
 ## Victor
+
+Nice weather
+
+```{r}
+
+2+2
+```
+
+Good morning
+
+```{r}
+
+33/6
+```
