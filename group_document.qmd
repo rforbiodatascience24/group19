@@ -10,4 +10,12 @@ editor: visual
 
 ## Ida Sofie
 
+```{r}
+2+2
+```
+
+```{r}
+print("I am cool B)")
+```
+
 ## Victor
