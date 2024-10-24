@@ -2,76 +2,96 @@
 title: "Group Document"
 format: html
 editor: visual
+editor_options: 
+  chunk_output_type: console
 ---
 
-## Nina
+## Load libraries 
 
-Heyy
+We load the libraries necessary for the PCA analysis
 
 ```{r}
-2+2
+
+
+library(tidyverse)
+library(broom)  
+library(cowplot)
 ```
 
-### New analysis
+Load data
 
-Here's some text.
+We load the data from breast cancer biopsies.
 
 ```{r}
-44*6
+
+biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
+
+
 ```
 
-## Mariam
-
-## New analysis
+We make a PCA analysis, by using the function prcomp:
 
 ```{r}
-420+0
+
+pca_fit <- biopsy %>% 
+  select(where(is.numeric)) |>  
+  prcomp(scale = TRUE)
 ```
 
-Ég er svöng
+To show how the data is projected on our two most principal components, we make a scatter plot.
 
 ```{r}
-1+1
+pca_fit %>%
+  augment(biopsy) %>% # add original dataset back in
+  ggplot(aes(.fittedPC1, .fittedPC2, color = outcome)) + 
+  geom_point(size = 1.5) +
+  scale_color_manual(
+    values = c(malignant = "#D55E00", benign = "#0072B2")
+  ) +
+  theme_half_open(12) + background_grid()
 ```
 
-## Ida Sofie
+Now we want to see each data groups on the PCA coordinates
 
 ```{r}
-2+2
+
+pca_fit %>%
+  tidy(matrix = "rotation")
+arrow_style <- arrow(
+  angle = 20, ends = "first", type = "closed", length = grid::unit(8, "pt")
+)
+
+# plot rotation matrix
+pca_fit %>%
+  tidy(matrix = "rotation") %>%
+  pivot_wider(names_from = "PC", names_prefix = "PC", values_from = "value") %>%
+  ggplot(aes(PC1, PC2)) +
+  geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
+  geom_text(
+    aes(label = column),
+    hjust = 1, nudge_x = -0.02, 
+    color = "#904C2F"
+  ) +
+  xlim(-1.25, .5) + ylim(-.5, 1) +
+  coord_fixed() + # fix aspect ratio to 1:1
+  theme_minimal_grid(12)
 ```
 
-```{r}
-print("I am cool B)")
-```
-
-#### New analysis
-
-Hello!
-
-```{r}
-1+2
-```
-
-## Victor
-
-### New feature
-
-blah blah
-
-```{r}
-3+3
-```
-
-Nice weatherd
+Now we want to see how much variance is explained by each principal component. This serves to see how much variance is explained by each attribute.
 
 ```{r}
 
-2+2
-```
+pca_fit %>%
+  tidy(matrix = "eigenvalues")
 
-Good morning
-
-```{r}
-
-33/6
+pca_fit %>%
+  tidy(matrix = "eigenvalues") %>%
+  ggplot(aes(PC, percent)) +
+  geom_col(fill = "#56B4E9", alpha = 0.8) +
+  scale_x_continuous(breaks = 1:9) +
+  scale_y_continuous(
+    labels = scales::percent_format(),
+    expand = expansion(mult = c(0, 0.01))
+  ) +
+  theme_minimal_hgrid(12)
 ```
