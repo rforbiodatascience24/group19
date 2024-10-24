@@ -1,9 +1,9 @@
 ---
-title: "Group Document"
-format: html
+title: "Lab 2 Assignment: Group 02"
+format:
+  html:
+    embed-resources: true
 editor: visual
-editor_options: 
-  chunk_output_type: console
 ---
 
 ## Load libraries 
@@ -18,7 +18,7 @@ library(broom)
 library(cowplot)
 ```
 
-Load data
+## Load data
 
 We load the data from breast cancer biopsies.
 
@@ -28,6 +28,8 @@ biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
 
 
 ```
+
+## PCA analysis
 
 We make a PCA analysis, by using the function prcomp:
 
@@ -46,9 +48,16 @@ pca_fit %>%
   ggplot(aes(.fittedPC1, .fittedPC2, color = outcome)) + 
   geom_point(size = 1.5) +
   scale_color_manual(
-    values = c(malignant = "#D55E00", benign = "#0072B2")
+    values = c(malignant = "#CC79A7", benign = "#56B4E9")
   ) +
-  theme_half_open(12) + background_grid()
+  theme_half_open(12) + background_grid()+
+  labs(
+    title = "PCA of Biopsy Data",
+    subtitle = "PC1 vs PC2 colored by outcome",
+    x = "Principal Component 1",
+    y = "Principal Component 2",
+    color = "Diagnosis Outcome" 
+  )
 ```
 
 Now we want to see each data groups on the PCA coordinates
@@ -66,11 +75,19 @@ pca_fit %>%
   tidy(matrix = "rotation") %>%
   pivot_wider(names_from = "PC", names_prefix = "PC", values_from = "value") %>%
   ggplot(aes(PC1, PC2)) +
-  geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
+  geom_segment(xend = 0, yend = 0, arrow = arrow_style, color = "#56B4E9") +
   geom_text(
     aes(label = column),
     hjust = 1, nudge_x = -0.02, 
     color = "#904C2F"
+  ) +
+  labs(
+    title = "PCA Rotation Matrix",
+    subtitle = "PC1 vs PC2 with variable loadings",
+    x = "Principal Component 1",
+    y = "Principal Component 2"
+  ) +
+  theme_minimal()
   ) +
   xlim(-1.25, .5) + ylim(-.5, 1) +
   coord_fixed() + # fix aspect ratio to 1:1
@@ -87,11 +104,17 @@ pca_fit %>%
 pca_fit %>%
   tidy(matrix = "eigenvalues") %>%
   ggplot(aes(PC, percent)) +
-  geom_col(fill = "#56B4E9", alpha = 0.8) +
+  geom_col(fill = "#D55E00", alpha = 0.8) + 
   scale_x_continuous(breaks = 1:9) +
   scale_y_continuous(
     labels = scales::percent_format(),
     expand = expansion(mult = c(0, 0.01))
+  ) +
+  labs(
+    title = "Variance Explained by Principal Components",
+    subtitle = "Percentage of variance for each PC",
+    x = "Principal Components",
+    y = "Variance Explained (%)"
   ) +
   theme_minimal_hgrid(12)
 ```
